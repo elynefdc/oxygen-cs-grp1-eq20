@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 requests = "*"
 signalrcore = "*"
+chardet = "*"
+charset-normalizer = "*"
 
 [dev-packages]
 
