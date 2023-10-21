@@ -1,11 +1,10 @@
-from signalrcore.hub_connection_builder import HubConnectionBuilder
-import logging
-import requests
-import json
-import time
 import os
+import time
+import logging
+import json
+import requests
+from signalrcore.hub_connection_builder import HubConnectionBuilder
 import variables_environnement
-
 
 
 class Main:
@@ -18,7 +17,7 @@ class Main:
         self.TICKETS = 2  # Setup your tickets here
         self.T_MAX = os.environ.get("T_MAX")  # Setup your max temperature here
         self.T_MIN = os.environ.get("T_MIN")  # Setup your min temperature here
-        self.DATABASE = os.environ.get("DATABASE") # Setup your database here
+        self.DATABASE = os.environ.get("DATABASE")  # Setup your database here
 
     def __del__(self):
         if self._hub_connection != None:
@@ -55,10 +54,16 @@ class Main:
         )
 
         self._hub_connection.on("ReceiveSensorData", self.on_sensor_data_received)
-        self._hub_connection.on_open(lambda: print("||| Connection opened.", flush=True))
-        self._hub_connection.on_close(lambda: print("||| Connection closed.", flush=True))
+        self._hub_connection.on_open(
+            lambda: print("||| Connection opened.", flush=True)
+        )
+        self._hub_connection.on_close(
+            lambda: print("||| Connection closed.", flush=True)
+        )
         self._hub_connection.on_error(
-            lambda data: print(f"||| An exception was thrown closed: {data.error}", flush=True)
+            lambda data: print(
+                f"||| An exception was thrown closed: {data.error}", flush=True
+            )
         )
 
     def on_sensor_data_received(self, data):
