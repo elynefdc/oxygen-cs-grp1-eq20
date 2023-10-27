@@ -14,11 +14,4 @@ repos:
       - id: black
 
   
-  - repo: local
-    hooks:
-      - id: unit test
-        name: unit test
-        entry: /test/test.py -m pytest
-        language: system
-        types: [python]
-        pass_filenames: false
+ 
