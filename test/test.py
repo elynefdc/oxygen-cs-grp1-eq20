@@ -1,7 +1,7 @@
 import unittest
 
-class TestMethods(unittest.TestCase):
 
+class TestMethods(unittest.TestCase):
     self.T_MAX = 25
     self.T_MIN = 15
 
@@ -9,6 +9,5 @@ class TestMethods(unittest.TestCase):
         assert T_MAX >= T_MIN
 
 
-
-if name == 'main':
+if name == "main":
     unittest.main()
