@@ -3,8 +3,10 @@ repos:
     rev: v3.0.0a6
     hooks:
       - id: pylint
+        args: [--enable=C0103,C0111]
 
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
       - id: black
+        args: [--line-length=100]
