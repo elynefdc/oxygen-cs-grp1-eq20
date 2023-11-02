@@ -1,1 +1,22 @@
-## To implement
+repos:
+  - repo: https://github.com/pycqa/pylint
+    rev: v3.0.0a6
+    hooks:
+      - id: pylint
+        args: [--disable=all]
+
+#  - repo: https://github.com/psf/black
+ #   rev: 23.3.0
+  #  hooks:
+   #   - id: black
+        
+
+#  - repo: local
+ #   hooks:
+  #    - id: unit tests
+   #     name: unit Tests
+    #    entry: .virtualenv/Scripts/python.exe
+     #   language: system
+      #  types: [python]
+       # pass_filenames: true
+        
