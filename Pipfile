@@ -8,6 +8,8 @@ requests = "*"
 signalrcore = "*"
 chardet = "*"
 charset-normalizer = "*"
+psycopg2 = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 

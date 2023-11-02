@@ -5,8 +5,9 @@ import json
 import time
 import os
 import variables_environnement
-
-
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+import db_map
 
 class Main:
     def __init__(self):
@@ -19,6 +20,9 @@ class Main:
         self.T_MAX = os.environ.get("T_MAX")  # Setup your max temperature here
         self.T_MIN = os.environ.get("T_MIN")  # Setup your min temperature here
         self.DATABASE = os.environ.get("DATABASE") # Setup your database here
+
+        self.engine = create_engine("postgresql+psycopg2://postgres:postgres@localhost/db_oxygen")
+        db_map.Base.metadata.create_all(self.engine)
 
     def __del__(self):
         if self._hub_connection != None:
@@ -87,7 +91,8 @@ class Main:
     def send_event_to_database(self, timestamp, event):
         """Save sensor data into database."""
         try:
-            # To implement
+            print(timestamp)
+            print(event)
             pass
         except requests.exceptions.RequestException as e:
             # To implement
