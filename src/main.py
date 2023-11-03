@@ -7,7 +7,11 @@ import os
 import variables_environnement
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-import db_map
+from db_map import UserEvent
+from db_map import SystemEvent
+from db_map import Base
+from datetime import datetime, timezone
+
 
 class Main:
     def __init__(self):
@@ -19,10 +23,10 @@ class Main:
         self.TICKETS = 2  # Setup your tickets here
         self.T_MAX = os.environ.get("T_MAX")  # Setup your max temperature here
         self.T_MIN = os.environ.get("T_MIN")  # Setup your min temperature here
-        self.DATABASE = os.environ.get("DATABASE") # Setup your database here
+        self.DATABASE = os.environ.get("DATABASE")  # Setup your database here
 
         self.engine = create_engine("postgresql+psycopg2://postgres:postgres@localhost/db_oxygen")
-        db_map.Base.metadata.create_all(self.engine)
+        Base.metadata.create_all(self.engine)
 
     def __del__(self):
         if self._hub_connection != None:
@@ -72,6 +76,9 @@ class Main:
             date = data[0]["date"]
             temperature = float(data[0]["data"])
             self.take_action(temperature)
+
+            self.send_event_to_database(date, temperature)
+
         except Exception as err:
             print(err, flush=True)
 
@@ -87,15 +94,29 @@ class Main:
         r = requests.get(f"{self.HOST}/api/hvac/{self.TOKEN}/{action}/{self.TICKETS}")
         details = json.loads(r.text)
         print(details, flush=True)
+        self.send_event_to_database(datetime.now(timezone.utc), details["Response"])
 
     def send_event_to_database(self, timestamp, event):
         """Save sensor data into database."""
         try:
-            print(timestamp)
-            print(event)
+            with Session(self.engine) as session:
+                if type(event) is str:
+                    data_event = SystemEvent(
+                        name=event,
+                        timestamp=timestamp
+                    )
+
+                elif type(event) is float:
+                    data_event = UserEvent(
+                        temperature=event,
+                        timestamp=timestamp
+                    )
+                session.add_all([data_event])
+                session.commit()
+
             pass
         except requests.exceptions.RequestException as e:
-            # To implement
+            print(e)
             pass
 
 
