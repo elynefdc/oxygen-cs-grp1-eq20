@@ -29,7 +29,7 @@ jobs:
 
     - name: Run unit tests
       run: |
-        pytest tests/
+        pytest test/
 
     - name: Code static analysis and formatting
       run: |
