@@ -6,10 +6,13 @@ name = "pypi"
 [packages]
 requests = "*"
 signalrcore = "*"
+pre-commit = "*"
 chardet = "*"
 charset-normalizer = "*"
+sqlalchemy = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.8"

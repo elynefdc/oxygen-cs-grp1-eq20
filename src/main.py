@@ -4,7 +4,6 @@ import logging
 import json
 import requests
 from signalrcore.hub_connection_builder import HubConnectionBuilder
-import variables_environnement
 
 
 class Main:
