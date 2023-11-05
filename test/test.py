@@ -6,9 +6,6 @@ from src.main import Main
 # Fixtures
 @pytest.fixture
 def mock_environ(monkeypatch):
-    """
-    Mock environment variables for testing purposes.
-    """
     monkeypatch.setenv("HOST", "TEST_HOST")
     monkeypatch.setenv("TOKEN", "TEST_TOKEN")
     monkeypatch.setenv("T_MAX", "TEST_T_MAX")
@@ -17,9 +14,6 @@ def mock_environ(monkeypatch):
 
 # Tests
 def test_environment_variables():
-    """
-    Tests if the application correctly reads the environment variables.
-    """
     # Given
     expected_host = "https://hvac-simulator-a23-y2kpq.ondigitalocean.app"
     expected_token = "t3ivYx3wZ5"
