@@ -3,7 +3,7 @@ name: CI CD
 on:
   push:
     branches:
-      - 'pre-main'
+      - 'elyne-modifcode'
   pull_request:
     types:
       - closed
