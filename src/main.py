@@ -1,9 +1,15 @@
-import os
-import time
-import logging
-import json
-import requests
 from signalrcore.hub_connection_builder import HubConnectionBuilder
+import logging
+import requests
+import json
+import time
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from db_map import UserEvent
+from db_map import SystemEvent
+from db_map import Base
+from datetime import datetime, timezone
 
 
 class Main:
@@ -11,12 +17,15 @@ class Main:
         """Setup environment variables and default values."""
         self._hub_connection = None
         self.HOST = os.environ.get("HOST")  # Setup your host here
-        self.TOKEN = os.environ.get("TOKEN")  # Setup your token here
+        self.TOKEN = os.environ.get("TOKEN", "t3ivYx3wZ5")  # Setup your token here
 
         self.TICKETS = 2  # Setup your tickets here
         self.T_MAX = os.environ.get("T_MAX")  # Setup your max temperature here
         self.T_MIN = os.environ.get("T_MIN")  # Setup your min temperature here
         self.DATABASE = os.environ.get("DATABASE")  # Setup your database here
+
+        self.engine = create_engine("postgresql+psycopg2://postgres:postgres@localhost/db_oxygen")
+        Base.metadata.create_all(self.engine)
 
     def __del__(self):
         if self._hub_connection != None:
@@ -53,16 +62,10 @@ class Main:
         )
 
         self._hub_connection.on("ReceiveSensorData", self.on_sensor_data_received)
-        self._hub_connection.on_open(
-            lambda: print("||| Connection opened.", flush=True)
-        )
-        self._hub_connection.on_close(
-            lambda: print("||| Connection closed.", flush=True)
-        )
+        self._hub_connection.on_open(lambda: print("||| Connection opened.", flush=True))
+        self._hub_connection.on_close(lambda: print("||| Connection closed.", flush=True))
         self._hub_connection.on_error(
-            lambda data: print(
-                f"||| An exception was thrown closed: {data.error}", flush=True
-            )
+            lambda data: print(f"||| An exception was thrown closed: {data.error}", flush=True)
         )
 
     def on_sensor_data_received(self, data):
@@ -72,6 +75,9 @@ class Main:
             date = data[0]["date"]
             temperature = float(data[0]["data"])
             self.take_action(temperature)
+
+            self.send_event_to_database(date, temperature)
+
         except Exception as err:
             print(err, flush=True)
 
@@ -87,14 +93,29 @@ class Main:
         r = requests.get(f"{self.HOST}/api/hvac/{self.TOKEN}/{action}/{self.TICKETS}")
         details = json.loads(r.text)
         print(details, flush=True)
+        self.send_event_to_database(datetime.now(timezone.utc), details["Response"])
 
     def send_event_to_database(self, timestamp, event):
         """Save sensor data into database."""
         try:
-            # To implement
+            with Session(self.engine) as session:
+                if type(event) is str:
+                    data_event = SystemEvent(
+                        name=event,
+                        timestamp=timestamp
+                    )
+
+                elif type(event) is float:
+                    data_event = UserEvent(
+                        temperature=event,
+                        timestamp=timestamp
+                    )
+                session.add_all([data_event])
+                session.commit()
+
             pass
         except requests.exceptions.RequestException as e:
-            # To implement
+            print(e)
             pass
 
 
