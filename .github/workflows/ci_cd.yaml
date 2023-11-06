@@ -41,9 +41,10 @@ jobs:
 
     
     - name: Load .env file
-      uses: softprops/action-gh-dotenv@v0.1
-      with:
-        filename: .env
+      run: |
+        source ..env
+        echo "Loaded .env file"
+      shell: bash
 
     - name: Run unit tests
       run: |
