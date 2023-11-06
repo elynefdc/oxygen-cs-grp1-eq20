@@ -39,6 +39,12 @@ jobs:
         pip install -r requirements.txt
         pip install pytest
 
+    
+    - name: Load .env file
+      uses: softprops/action-gh-dotenv@v0.1
+      with:
+        filename: .env
+
     - name: Run unit tests
       run: |
         pytest
