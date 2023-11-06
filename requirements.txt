@@ -1,4 +1,6 @@
+﻿certifi
 charset-normalizer
+distlib
 filelock
 pipenv
 psycopg2-binary
