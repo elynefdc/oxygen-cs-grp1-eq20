@@ -17,12 +17,12 @@ class Main:
     def __init__(self):
         """Setup environment variables and default values."""
         self._hub_connection = None
-        self.HOST = os.environ.get("HOST")  # Setup your host here
+        self.HOST = os.environ.get("HOST", "https://hvac-simulator-a23-y2kpq.ondigitalocean.app")  # Setup your host here
         self.TOKEN = os.environ.get("TOKEN", "t3ivYx3wZ5")  # Setup your token here
 
         self.TICKETS = 2  # Setup your tickets here
-        self.T_MAX = os.environ.get("T_MAX")  # Setup your max temperature here
-        self.T_MIN = os.environ.get("T_MIN")  # Setup your min temperature here
+        self.T_MAX = os.environ.get("T_MAX", 50)  # Setup your max temperature here
+        self.T_MIN = os.environ.get("T_MIN", 0) # Setup your min temperature here
         self.DATABASE = os.environ.get("DATABASE")  # Setup your database here
 
         self.engine = create_engine("postgresql+psycopg2://postgres:postgres@localhost/db_oxygen")
