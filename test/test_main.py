@@ -1,6 +1,6 @@
 import pytest
 
-from ..src.main import Main
+from src.main import Main
 
 
 # Fixtures
