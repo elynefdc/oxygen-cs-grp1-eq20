@@ -4,7 +4,6 @@ distlib
 filelock
 pipenv
 psycopg2-binary
-psycopg2
 requests
 signalrcore
 SQLAlchemy
