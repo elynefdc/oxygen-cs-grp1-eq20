@@ -10,11 +10,10 @@ pipenv==2023.10.24
 platformdirs==3.11.0
 psycopg2-binary==2.9.9
 pytz==2023.3.post1
-requests==2.31.0
-signalrcore==0.9.5
-SQLAlchemy==2.0.22
+requests
+signalrcore
+SQLAlchemy
 typing_extensions==4.8.0
 urllib3==2.0.7
-virtualenv==20.24.6
-websocket-client==1.0.0
+virtualenv
 pre-commit==3.5.0
