@@ -42,7 +42,7 @@ jobs:
     
     - name: Load .env file
       run: |
-        source ..env
+        source .env
         echo "Loaded .env file"
       shell: bash
 
