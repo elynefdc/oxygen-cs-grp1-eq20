@@ -1,5 +1,6 @@
 import pytest
 from dotenv import load_dotenv
+import os
 from src.main import Main
 
 load_dotenv()
