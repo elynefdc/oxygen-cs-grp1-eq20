@@ -8,8 +8,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from datetime import datetime, timezone
 from .db_map import UserEvent
-from db_map import SystemEvent
-from db_map import Base
+from .db_map import SystemEvent
+from .db_map import Base
 
 
 
