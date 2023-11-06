@@ -4,9 +4,10 @@ services:
     container_name: postgres-db
     image: postgres:14.1-alpine
     restart: always
+    environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=labets
+      - POSTGRES_DB=db_oxygen
     ports:
       - "5432:5432"
     volumes:
