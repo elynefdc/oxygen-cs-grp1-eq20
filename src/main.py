@@ -3,6 +3,7 @@ import os
 import time
 import json
 import requests
+from dotenv import load_dotenv
 from signalrcore.hub_connection_builder import HubConnectionBuilder
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -11,7 +12,7 @@ from .db_map import UserEvent
 from .db_map import SystemEvent
 from .db_map import Base
 
-
+load_dotenv()
 
 class Main:
     def __init__(self):
