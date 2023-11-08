@@ -12,18 +12,6 @@ jobs:
   Build:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:14.1-alpine
-        env:
-          POSTGRES_HOST: localhost
-          POSTGRES_DB: db_oxygen
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-        
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
