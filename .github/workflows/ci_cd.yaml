@@ -1,9 +1,9 @@
-name: CI-CD
+name: CI CD
 
 on:
   push:
     branches:
-      - 'pre-main'
+      - 'elyne-modifcode'
   pull_request:
     types:
       - closed
@@ -27,6 +27,13 @@ jobs:
         pip install -r requirements.txt
         pip install pytest
 
+    
+    - name: Load .env file
+      run: |
+        source .env
+        echo "Loaded .env file"
+      shell: bash
+
     - name: Run unit tests
       run: |
         pytest
@@ -35,7 +42,7 @@ jobs:
       run: |
         pip install black
         pip install "pylint==v3.0.2"
-        find src -name '*.py' | xargs pylint
+        find src -name '*.py' | xargs pylint --fail-under=5
         black src
         
     - name: Prevent push on failure
@@ -44,7 +51,6 @@ jobs:
         
   Deploy:
     needs: Build
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
     - name: Login to Docker Hub

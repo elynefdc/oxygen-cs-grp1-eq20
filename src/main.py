@@ -1,28 +1,30 @@
-from signalrcore.hub_connection_builder import HubConnectionBuilder
 import logging
-import requests
-import json
-import time
 import os
+import time
+import json
+import requests
+from dotenv import load_dotenv
+from signalrcore.hub_connection_builder import HubConnectionBuilder
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from db_map import UserEvent
-from db_map import SystemEvent
-from db_map import Base
 from datetime import datetime, timezone
+from .db_map import UserEvent
+from .db_map import SystemEvent
+from .db_map import Base
 
+load_dotenv()
 
 class Main:
     def __init__(self):
         """Setup environment variables and default values."""
         self._hub_connection = None
-        self.HOST = os.environ.get("HOST")  # Setup your host here
+        self.HOST = os.environ.get("HOST", "https://hvac-simulator-a23-y2kpq.ondigitalocean.app")  # Setup your host here
         self.TOKEN = os.environ.get("TOKEN", "t3ivYx3wZ5")  # Setup your token here
 
         self.TICKETS = 2  # Setup your tickets here
-        self.T_MAX = os.environ.get("T_MAX")  # Setup your max temperature here
-        self.T_MIN = os.environ.get("T_MIN")  # Setup your min temperature here
-        self.DATABASE = os.environ.get("DATABASE")  # Setup your database here
+        self.T_MAX = os.environ.get("T_MAX", 50)  # Setup your max temperature here
+        self.T_MIN = os.environ.get("T_MIN", 0) # Setup your min temperature here
+        self.DATABASE = os.environ.get("DATABASE", "db_oxygen")  # Setup your database here
 
         self.engine = create_engine("postgresql+psycopg2://postgres:postgres@localhost/db_oxygen")
         Base.metadata.create_all(self.engine)
