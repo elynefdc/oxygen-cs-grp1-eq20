@@ -26,7 +26,7 @@ class Main:
         self.T_MIN = os.environ.get("T_MIN", 0) # Setup your min temperature here
         self.DATABASE = os.environ.get("DATABASE", "db_oxygen")  # Setup your database here
 
-        self.engine = create_engine("postgresql+psycopg2://postgres:postgres@localhost/db_oxygen")
+        self.engine = create_engine("postgresql+psycopg2://postgres:postgres@host.docker.internal/db_oxygen")
         Base.metadata.create_all(self.engine)
 
     def __del__(self):
