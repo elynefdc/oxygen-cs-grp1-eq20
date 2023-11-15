@@ -1,4 +1,5 @@
 import datetime
+from dotenv import load_dotenv
 from typing import List
 from typing import Optional
 from sqlalchemy import ForeignKey
@@ -11,6 +12,7 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 from sqlalchemy import BIGINT, Integer, NVARCHAR, String, TIMESTAMP
 
+load_dotenv()
 
 class Base(DeclarativeBase):
     pass

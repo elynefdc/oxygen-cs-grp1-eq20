@@ -1,0 +1,12 @@
+﻿certifi
+charset-normalizer
+distlib
+filelock
+pipenv
+psycopg2-binary
+requests
+signalrcore
+SQLAlchemy
+python-dotenv
+virtualenv
+pre-commit

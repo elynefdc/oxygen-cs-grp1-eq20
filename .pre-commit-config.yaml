@@ -3,20 +3,21 @@ repos:
     rev: v3.0.0a6
     hooks:
       - id: pylint
-        args: [--disable=all]
+        args: ['src/**/*.py']
 
-#  - repo: https://github.com/psf/black
- #   rev: 23.3.0
-  #  hooks:
-   #   - id: black
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+        args: ['src/**/*.py']
         
 
-#  - repo: local
- #   hooks:
-  #    - id: unit tests
-   #     name: unit Tests
-    #    entry: .virtualenv/Scripts/python.exe
-     #   language: system
-      #  types: [python]
-       # pass_filenames: true
+  - repo: local
+    hooks:
+      - id: unit tests
+        name: unit Tests
+        entry: .venv/Scripts/python.exe
+        language: system
+        types: [python]
+        pass_filenames: false
         

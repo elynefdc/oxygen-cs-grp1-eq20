@@ -6,15 +6,18 @@ name = "pypi"
 [packages]
 requests = "*"
 signalrcore = "*"
+pre-commit = "*"
 chardet = "*"
 charset-normalizer = "*"
+sqlalchemy = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.8"
 
 [scripts]
 start = "python src/main.py"
-test = "python test/test.py"
+test = "# To implement"
 lint = "# To implement"
