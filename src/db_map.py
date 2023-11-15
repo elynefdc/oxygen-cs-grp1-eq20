@@ -12,7 +12,10 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 from sqlalchemy import BIGINT, Integer, NVARCHAR, String, TIMESTAMP
 
+<<<<<<< HEAD
 load_dotenv()
+=======
+>>>>>>> main
 
 class Base(DeclarativeBase):
     pass
