@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Copy only specific files at the root
 COPY requirements.txt /app/
-COPY src/ /app/src/
+COPY src/ /app/
 
 # Install pipenv
 RUN pip install --upgrade pip
@@ -28,5 +28,5 @@ RUN pipenv install --system --deploy --ignore-pipfile
 EXPOSE 80
 
 # Run main.py when the container launches
-CMD ["python", "src/main.py"]
+CMD ["python", "main.py"]
 
