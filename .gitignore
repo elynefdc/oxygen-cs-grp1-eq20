@@ -139,4 +139,4 @@ deploy_rsa.pub
 kubeconfig.yaml
 .idea
 
-./data/
+./data/*
