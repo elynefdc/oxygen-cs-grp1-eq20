@@ -138,3 +138,5 @@ deploy_rsa.pub
 # Kubernetes config
 kubeconfig.yaml
 .idea
+
+./data
