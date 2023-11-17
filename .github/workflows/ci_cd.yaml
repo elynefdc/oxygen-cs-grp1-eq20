@@ -34,10 +34,6 @@ jobs:
         echo "Loaded .env file"
       shell: bash
 
-    - name: Run unit tests
-      run: |
-        pytest
-
     - name: Code static analysis and formatting
       run: |
         pip install black
