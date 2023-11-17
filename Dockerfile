@@ -28,5 +28,4 @@ RUN pipenv install --system --deploy --ignore-pipfile
 EXPOSE 80
 
 # Run main.py when the container launches
-CMD ["python", "src/main.py"]
-
+CMD ["python", "-m", "src.main"]
