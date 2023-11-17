@@ -8,9 +8,9 @@ from signalrcore.hub_connection_builder import HubConnectionBuilder
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from datetime import datetime, timezone
-from src import db_map.UserEvent
-from src import db_map.SystemEvent
-from src import db_map.Base
+from db_map import UserEvent
+from db_map import SystemEvent
+from db_map import Base
 
 load_dotenv()
 
