@@ -27,13 +27,6 @@ jobs:
         pip install -r requirements.txt
         pip install pytest
 
-    
-    - name: Load .env file
-      run: |
-        source .env
-        echo "Loaded .env file"
-      shell: bash
-
     - name: Code static analysis and formatting
       run: |
         pip install black
