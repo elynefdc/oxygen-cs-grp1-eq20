@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Copy only specific files at the root
 COPY requirements.txt /app/
-COPY src/ /app/
+COPY src/ /app/src
 
 # Install pipenv
 RUN pip install --upgrade pip
