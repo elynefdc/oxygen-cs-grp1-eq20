@@ -1,5 +1,6 @@
 version: "3.7"
 services:
+####################### POSTGRES DATABASE #######################
   db_postgres2:
     container_name: db_postgres2
     image: postgres:latest
@@ -7,7 +8,6 @@ services:
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'postgres'
-      POSTGRES_DB: 'db_postgres'
     logging:
       options:
         max-size: 10m
@@ -21,18 +21,23 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  pgadmin2:
-    container_name: pgadmin2
+    build:
+      context: ./postgres/
+####################### PG_ADMIN #######################
+  pgadmin:
+    container_name: conteneur_pgadmin
     image: dpage/pgadmin4:latest
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
+    user: root
     ports:
       - "5050:80"
     volumes:
       - ./data/pgadmin-data:/var/lib/pgadmin:Z
-  Metriques:
+####################### METRIQUE #######################
+  metriques:
     container_name: conteneur_metriques
     image: elynefdc/metrics:latest
     restart: always
@@ -40,9 +45,18 @@ services:
       GITHUB_TOKEN: ${GITHUB_TOKEN}
     ports:
       - "3000:80"
-  Oxygene:
+    depends_on:
+      db_postgres2:
+        condition: service_healthy
+####################### OXYGEN #######################
+  oxygene:
     container_name: conteneur_oxygene
     image: elynefdc/oxygen-cs:latest
     restart: always
     ports:
       - "5051:80"
+    depends_on:
+      db_postgres2:
+        condition: service_healthy
+    build:
+      context: .
