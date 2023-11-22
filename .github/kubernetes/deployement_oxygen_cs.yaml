@@ -15,7 +15,7 @@ spec:
         app: oxygen-cs
     spec:
       containers:
-      - name: Oxygen
+      - name: oxygen-cs
         image: elynefdc/oxygen-cs:latest
         ports:
         - containerPort: "5051:80"
