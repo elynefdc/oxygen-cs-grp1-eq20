@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oxygencs-configmap
+data:
+  HOST: 'https://10.194.33.111:16443'
+  TICKETS : '2'
+  T_MAX : '50'
+  T_MIN : '0'
+  DATABASE : 'db_oxygen'
