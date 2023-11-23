@@ -1,2 +1,0 @@
-CREATE DATABASE db_oxygen;
-CREATE DATABASE db_postgres;
