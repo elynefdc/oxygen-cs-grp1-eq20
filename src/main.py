@@ -22,10 +22,9 @@ class Main:
         self.TICKETS = 2  # Setup your tickets here
         self.T_MAX = os.environ.get("T_MAX", 50)  # Setup your max temperature here
         self.T_MIN = os.environ.get("T_MIN", 0) # Setup your min temperature here
-        self.DATABASE = os.environ.get("DATABASE", "db_oxygen")  # Setup your database here
+        self.DATABASE = os.environ.get("DATABASE", "postgres")  # Setup your database here
 
-        postgres_host = os.environ.get("POSTGRES_HOST")
-        self.engine = create_engine(f"postgresql+psycopg2://postgres:postgres@host.docker.internal:5432/{postgres_host}")
+        self.engine = create_engine(f"postgresql+psycopg2://postgres:postgres@host.docker.internal:5432/{self.DATABASE}")
         Base.metadata.create_all(self.engine)
 
     def __del__(self):
