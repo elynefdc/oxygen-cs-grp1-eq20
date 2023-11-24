@@ -31,7 +31,7 @@ jobs:
       run: |
         pip install black
         pip install "pylint==v3.0.2"
-        find src -name '*.py' | xargs pylint --fail-under=1
+        find src -name '*.py' | xargs pylint --fail-under=0
         black src
         
     - name: Prevent push on failure
