@@ -43,8 +43,9 @@ services:
     restart: always
     environment:
       GITHUB_TOKEN: ${GITHUB_TOKEN}
+      POSTGRES_HOST: ${POSTGRES_HOST}
     ports:
-      - "3000:80"
+      - "3000:3000"
     depends_on:
       db_postgres2:
         condition: service_healthy
