@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  POSTGRES_DB: postgres
+  GITHUB_TOKEN: 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
+  POSTGRES_USER: postgres
+  POSTGRES_HOST: db-postgres2
+  HOST: 'https://10.194.33.111:16443'
+  TICKETS : '2'
+  T_MAX : '50'
+  T_MIN : '0'
